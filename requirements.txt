@@ -52,3 +52,7 @@ webencodings==0.5.1
 
 # zopfli: A compression library used to reduce the size of files using the Zopfli algorithm. It's often used for optimizing web assets.
 zopfli==0.2.3.post1
+
+# gunicorn: A WSGI HTTP server for UNIX, used for running Python web applications in production. It is required for serving Django apps on Heroku.
+# NOTE: Heroku uses this to run the web process in production.
+gunicorn==20.1.0
