@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heatmap Report</title>
+    <!-- Link to Materialize CSS from the CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" />
+
+    <!-- Load static files -->
+    {% load static %}
+    
+    <!-- Link the CSS file -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+
+</head>
+<body>
+    <h1 class="center-align">Heatmap Report</h1>
+    
+    <p><strong>Client:</strong> {{ client.name }}</p>
+    
+    <p><strong>Date:</strong> {{ image_upload.uploaded_at|date:"d/m/Y H:i:s" }}</p>
+    
+    <h3>Original Image</h3>
+    <img src="{{ original_image_url }}" alt="Original Image" style="width: 30%; max-width: 500px;"/>
+    
+    <h3>Heatmap</h3>
+    <img src="{{ heatmap_url }}" alt="Heatmap" style="width: 30%; max-width: 500px;"/>
+    
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Link to Materialize CSS from CDN -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Load static files -->
+    {% load static %}
+
+    <!-- Link to custom CSS file -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+
+    <title>Upload Image</title>
+  </head>
+  <body>
+    <!-- Main container -->
+    <div class="container">
+      <!-- Main title -->
+      <h1 class="center-align">Upload Image and Generate Report</h1>
+
+      <!-- Client Information Section -->
+      <h2>Client Information</h2>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Client Information Form Fields (name, email, phone) -->
+        <div class="input-field">
+          {{ client_form.name }}
+          <label for="id_name">Name</label>
+        </div>
+
+        <div class="input-field">
+          {{ client_form.email }}
+          <label for="id_email">Email</label>
+        </div>
+
+        <div class="input-field">
+          {{ client_form.phone }}
+          <label for="id_phone">Phone</label>
+        </div>
+
+        <!-- Image Upload Section -->
+        <h2>Upload Image</h2>
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>File</span>
+            <!-- Make sure the file input has an ID for easier targeting -->
+            {{ image_form.image }}
+          </div>
+          <div class="file-path-wrapper">
+            <input
+              class="file-path validate"
+              type="text"
+              placeholder="Upload your image"
+            />
+          </div>
+        </div>
+
+        <!-- Image Preview Section -->
+        <div id="image-preview-container" class="center-align">
+          <img
+            id="image-preview"
+            src=""
+            alt="Image Preview"
+            style="max-width: 180px; display: none"
+          />
+        </div>
+
+        <!-- Submit and Reset Buttons -->
+        <div class="center-align">
+          <!-- Submit Button -->
+          <button class="btn waves-effect waves-light" type="submit">
+            Upload
+          </button>
+          <!-- Reset Button -->
+          <button class="btn waves-effect waves-light red" type="reset">
+            Reset
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Link to jQuery and Materialize JS from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+      // Initialize Materialize components
+      M.AutoInit();
+
+      // JavaScript to handle image preview and validations
+      document
+        .getElementById("id_image")
+        .addEventListener("change", function (event) {
+          var file = event.target.files[0];
+
+          if (file) {
+            // File type validation
+            const fileType = file.type.split("/")[0]; // Get the type of the file
+            if (fileType !== "image") {
+              alert("Please upload an image file.");
+              return; // Stop the process if it's not an image
+            }
+
+            // File size validation (maximum 2MB)
+            if (file.size > 2 * 1024 * 1024) {
+              // 2MB in bytes
+              alert("Image size should be less than 2MB.");
+              return; // Stop the process if the image is too large
+            }
+
+            // If validations pass, proceed with the image preview
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+              // Get the image preview element
+              var preview = document.getElementById("image-preview");
+              // Set the source of the image to the selected file
+              preview.src = e.target.result;
+              // Show the image preview
+              preview.style.display = "block";
+            };
+
+            // Read the file as a Data URL
+            reader.readAsDataURL(file);
+          }
+        });
+
+      // JavaScript to handle reset action
+      document
+        .querySelector('button[type="reset"]')
+        .addEventListener("click", function () {
+          // Hide the image preview when the reset button is clicked
+          var preview = document.getElementById("image-preview");
+          preview.style.display = "none";
+        });
+
+      // JavaScript to handle empty fields validation before form submission
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        form.addEventListener("submit", function (event) {
+          const inputs = form.querySelectorAll("input");
+          let valid = true;
+
+          // Check each input field to ensure it's not empty
+          inputs.forEach((input) => {
+            // Validation for empty fields
+            if (!input.value.trim()) {
+              input.classList.add("invalid");  // Materialize visual validation
+              // Create an error message next to the field
+              const errorMessage = document.createElement("span");
+              errorMessage.classList.add("helper-text", "red-text");
+              errorMessage.textContent = `${input.name} cannot be empty`;
+              input.parentNode.appendChild(errorMessage);
+              valid = false;
+            }
+          });
+
+          // Additional validation for the full name (Name field)
+          const name = document.getElementById("id_name").value;
+          const nameRegex =
+            /^[A-Za-záéíóúÁÉÍÓÚüÜñÑ]+(?:\s[A-Za-záéíóúÁÉÍÓÚüÜñÑ]+)+$/; // Validates names with first and last name
+          if (!nameRegex.test(name)) {
+            alert("Please enter a valid full name (First and Last name).");
+            valid = false;
+          }
+
+          // Additional validation for email field format
+          const email = document.getElementById("id_email").value;
+          const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+          if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            valid = false;
+          }
+
+          // Additional validation for phone field format
+          const phone = document.getElementById("id_phone").value;
+          const phoneRegex = /^\+?[0-9\s\-]+$/; // Validates numbers, spaces, and dashes
+          if (!phoneRegex.test(phone)) {
+            alert("Please enter a valid phone number.");
+            valid = false;
+          }
+
+          // Prevent form submission if any validation fails
+          if (!valid) {
+            event.preventDefault();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
