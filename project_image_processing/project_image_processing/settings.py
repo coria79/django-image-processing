@@ -28,7 +28,7 @@ DEBUG = True
 
 # Hosts that are allowed to connect to the Django app. 
 # For production, you should define a list of trusted domains here.
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com']  # Allow any subdomain of herokuapp.com to be accessible
 
 # Application definition: the list of installed Django apps
 INSTALLED_APPS = [
@@ -108,9 +108,17 @@ TIME_ZONE = 'UTC'  # Set to your local timezone, e.g., 'America/New_York'
 USE_I18N = True  # Enable internationalization (translations)
 USE_TZ = True  # Enable timezone support
 
+# Static root for Heroku deployment
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Directory where static files will be collected
+
 # Static files settings (CSS, JavaScript, Images)
 # Django uses this setting to manage static files during development and production
-STATIC_URL = 'static/'  # URL to access static files (e.g., /static/styles.css)
+STATIC_URL = '/static/'  # URL to access static files (e.g., /static/styles.css)
+
+# Configure static files storage for production
+# This ensures that static files are properly handled in production
+if not DEBUG:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'  # Use hashed filenames in production
 
 # Default primary key field type for models
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'  # Newer versions of Django use BigAutoField by default
