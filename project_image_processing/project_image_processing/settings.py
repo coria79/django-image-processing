@@ -24,7 +24,8 @@ SECRET_KEY = 'django-insecure-mff78#)o%n_$49+cj7yh1xu()j+t2e(vsxw1g_-&4+nb*qofag
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG should be set to False when deploying to production
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 
 # Hosts that are allowed to connect to the Django app. 
 # For production, you should define a list of trusted domains here.
