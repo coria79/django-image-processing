@@ -1,1 +1,1 @@
-web: gunicorn project_image_processing.wsgi:application --log-file -
+web: gunicorn project_image_processing.wsgi
