@@ -29,7 +29,7 @@ DEBUG = False
 
 # Hosts that are allowed to connect to the Django app. 
 # For production, you should define a list of trusted domains here.
-ALLOWED_HOSTS = ['.herokuapp.com']  # Allow any subdomain of herokuapp.com to be accessible
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost']  # Allow any subdomain of herokuapp.com to be accessible
 
 # Application definition: the list of installed Django apps
 INSTALLED_APPS = [
