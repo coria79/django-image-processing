@@ -1,14 +1,1 @@
-# The 'Procfile' is necessary for Heroku to know how to run the application.
-# Heroku cannot start the application without this file. The Procfile indicates the type
-# of process to run, in this case, a web server to serve our Django app.
-
-# The following line tells Heroku to use Gunicorn, a WSGI server, to run
-# the Django application. Gunicorn is an efficient web server for WSGI-based applications,
-# such as Django.
-
-# 'project_image_processing.wsgi' is the path to the Django application’s WSGI file,
-# which is used to communicate between the web server and the Django application.
-# Make sure to replace 'project_image_processing' with the actual name of your project folder
-# if it is different.
-
 web: gunicorn project_image_processing.wsgi
