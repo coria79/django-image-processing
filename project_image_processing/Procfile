@@ -11,4 +11,4 @@
 # Make sure to replace 'project_image_processing' with the actual name of your project folder
 # if it is different.
 
-web:gunicorn project_image_processing.wsgi
+web: gunicorn project_image_processing.wsgi
