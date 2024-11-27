@@ -1,1 +1,1 @@
-web: gunicorn project_image_processing.wsgi:application --chdir .
+web: cd project_image_processing && gunicorn project_image_processing.wsgi:application
