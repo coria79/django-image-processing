@@ -22,7 +22,8 @@ numpy==1.25.2 # For the latest stable version, numpy==1.25.2
 
 # opencv-python: OpenCV is a popular computer vision library that allows you to process images and videos.
 # opencv-python==4.10.0.84
-opencv-python==4.7.0.72
+# opencv-python==4.7.0.72
+opencv-python-headless==4.7.0.72
 
 
 # pillow: A library for image processing in Python. It's an improved version of the Python Imaging Library (PIL).
