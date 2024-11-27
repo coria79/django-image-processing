@@ -128,3 +128,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'  # Newer versions of Django
 # These settings control where uploaded files will be stored on the server
 MEDIA_URL = '/media/'  # URL to access media files (e.g., /media/uploads/image.jpg)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store media files on the server
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Directorio para archivos estáticos globales
