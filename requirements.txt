@@ -16,6 +16,10 @@ Django==5.1.3
 # fonttools: A library to manipulate font files in different formats. It's often used in font processing and web design.
 fonttools==4.54.1
 
+# gunicorn: A WSGI HTTP server for UNIX, used for running Python web applications in production. It is required for serving Django apps on Heroku.
+# NOTE: Heroku uses this to run the web process in production.
+gunicorn==20.1.0
+
 # numpy: A powerful library for numerical computing in Python. It's often used in data science and machine learning.
 # Note: The latest stable version at the time of writing is 1.25.2, not 2.1.3.
 numpy==1.25.2 # For the latest stable version, numpy==1.25.2
@@ -25,9 +29,10 @@ numpy==1.25.2 # For the latest stable version, numpy==1.25.2
 # opencv-python==4.7.0.72
 opencv-python-headless==4.7.0.72
 
-
 # pillow: A library for image processing in Python. It's an improved version of the Python Imaging Library (PIL).
 pillow==10.4.0
+
+pip==24.0
 
 # pycparser: A parser for C code, used to understand and analyze C code from Python. It's often a dependency for other libraries that deal with C code.
 pycparser==2.22
@@ -37,6 +42,8 @@ pydyf==0.11.0
 
 # pyphen: A library for hyphenation, used to break words at appropriate points in text processing.
 pyphen==0.15.0
+
+setuptools==70.3.0
 
 # sqlparse: A library for parsing SQL queries, useful for working with databases or analyzing SQL statements.
 sqlparse==0.5.1
@@ -53,9 +60,7 @@ weasyprint==63.0
 # webencodings: A library for handling different web encodings (such as UTF-8, ISO-8859, etc.) in Python.
 webencodings==0.5.1
 
+wheel==0.44.0
+
 # zopfli: A compression library used to reduce the size of files using the Zopfli algorithm. It's often used for optimizing web assets.
 zopfli==0.2.3.post1
-
-# gunicorn: A WSGI HTTP server for UNIX, used for running Python web applications in production. It is required for serving Django apps on Heroku.
-# NOTE: Heroku uses this to run the web process in production.
-gunicorn==20.1.0
