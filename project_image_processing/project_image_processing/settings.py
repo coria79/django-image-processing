@@ -25,11 +25,11 @@ SECRET_KEY = 'django-insecure-mff78#)o%n_$49+cj7yh1xu()j+t2e(vsxw1g_-&4+nb*qofag
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG should be set to False when deploying to production
 # DEBUG = True
-DEBUG = False
+DEBUG = True
 
 # Hosts that are allowed to connect to the Django app. 
 # For production, you should define a list of trusted domains here.
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost']  # Allow any subdomain of herokuapp.com to be accessible
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']  # Allow any subdomain of herokuapp.com to be accessible
 
 # Application definition: the list of installed Django apps
 INSTALLED_APPS = [
@@ -118,6 +118,9 @@ STATIC_URL = '/static/'  # URL to access static files (e.g., /static/styles.css)
 
 # Configure static files storage for production
 # This ensures that static files are properly handled in production
+
+# Add to serve media files in development when DEBUG is True
+# Ensure correct handling of static files for production when DEBUG is False
 if not DEBUG:
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'  # Use hashed filenames in production
 
